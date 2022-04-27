@@ -1,0 +1,12 @@
+.TableRowButton {
+  display: flex;
+}
+.Checkbox {
+  display: block;
+  width: 15px;
+  height: 15px;
+  border: 2px solid black;
+  &.Checked {
+    background-color: black;
+  }
+}
