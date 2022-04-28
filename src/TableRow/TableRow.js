@@ -10,15 +10,24 @@ export default function TableRow({ data }) {
     setIsSelected(!isSelected);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleRowToggle();
+    }
+  };
+
   return (
-    <div className="TableRow">
-      <button className="TableRowButton" onClick={handleRowToggle}>
-        <div className={`Checkbox ${isSelected ? "Checked" : ""}`}></div>
-        <span>{name}</span>
-        <span>{device}</span>
-        <span>{path}</span>
-        <span>{status}</span>
-      </button>
-    </div>
+    <tr
+      className="TableRow"
+      onClick={handleRowToggle}
+      tabindex="0"
+      onKeyDown={handleKeyDown}
+    >
+      <td className={`Checkbox ${isSelected ? "Checked" : ""}`}></td>
+      <td>{name}</td>
+      <td>{device}</td>
+      <td>{path}</td>
+      <td>{status}</td>
+    </tr>
   );
 }

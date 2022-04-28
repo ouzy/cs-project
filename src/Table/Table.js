@@ -41,10 +41,12 @@ export default function Table() {
   ];
 
   return (
-    <div className="Table">
-      {data.map((dataRow) => {
-        return <TableRow data={dataRow} />;
-      })}
-    </div>
+    <table className="Table">
+      <tbody>
+        {data.map((dataRow) => {
+          return <TableRow data={dataRow} />;
+        })}
+      </tbody>
+    </table>
   );
 }

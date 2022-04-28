@@ -1,5 +1,8 @@
-.TableRowButton {
-  display: flex;
+.TableRow {
+  width: 100%;
+  &:hover {
+    cursor: pointer;
+  }
 }
 .Checkbox {
   display: block;
