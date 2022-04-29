@@ -4,11 +4,29 @@ th, td {
 .TableRow {
   width: 100%;
   transition: all .2s ease;
+  border-top: 1px solid #EDEDED;
   &:hover {
     cursor: pointer;
     background-color: #F5F5F5;
   }
   &.Selected {
     background-color: #EEEEEE;
+  }
+  .available {
+    span {
+      position: relative;
+      &:before {
+        content: '';
+        position: absolute;
+        height: 15px;
+        width: 15px;
+        border-radius: 50%;
+        background-color: #84D032;
+        left: -20px;
+        top: 0; 
+        bottom: 0;
+        margin: auto;
+      }
+    }
   }
 }

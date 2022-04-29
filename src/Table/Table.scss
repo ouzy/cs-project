@@ -2,19 +2,32 @@
   width: 100%;
   text-align: left;
   border-spacing: 0;
-
-  color: #757575;
+  border-collapse: collapse;
+  border: 1px solid #EDEDED;
 }
 
 .TableControls {
   display: flex;
-  .TableControlsButton {
+  padding: 15px 10px;
+  button {
     padding: 0;
     border: 0;
-
-    margin-right: 50px;
+    background-color: transparent;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
     &:hover {
       cursor: pointer;
     }
+  }
+  .CheckboxButton {
+    padding: 0;
+    border: 0;
+    
+  }
+  span {
+    margin: 0 50px 0 15px;
+  }
+  .DownloadButton {
   }
 }

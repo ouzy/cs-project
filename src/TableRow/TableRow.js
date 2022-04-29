@@ -35,7 +35,9 @@ export default function TableRow({ data, toggleRowSelect }) {
       <td>{name}</td>
       <td>{device}</td>
       <td>{path}</td>
-      <td>{status[0].toUpperCase() + status.substring(1)}</td>
+      <td className={status}>
+        <span>{status[0].toUpperCase() + status.substring(1)}</span>
+      </td>
     </tr>
   );
 }

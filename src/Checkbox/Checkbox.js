@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./Checkbox.scss";
 
 export default function Checkbox({ status }) {

@@ -91,9 +91,22 @@ export default function Table() {
     }
   };
 
+  const handleDownload = () => {
+    const availableForDownload = tableRows.filter(
+      (row) => row.status === "available" && row.selected
+    );
+
+    alert(
+      availableForDownload.map((row) => {
+        return `${row.path} ${row.device}`;
+      })
+    );
+  };
+
   const [countText, setCountText] = useState("None Selected");
   const [tableRows, dispatch] = useReducer(reducer, transformedData);
   const [tableCheckboxStatus, setTableCheckboxStatus] = useState(0);
+
   useEffect(() => {
     const numChecked = tableRows.filter((row) => row.selected).length;
     const numElements = tableRows.length;
@@ -111,22 +124,23 @@ export default function Table() {
   return (
     <>
       <div className="TableControls">
-        <button
-          className="TableControlsButton"
-          onClick={handleTableCheckboxClick}
-        >
+        <button className="CheckboxButton" onClick={handleTableCheckboxClick}>
           <Checkbox status={tableCheckboxStatus} />
         </button>
         <span>{countText}</span>
+        <button className="DownloadButton" onClick={handleDownload}>
+          Download Selected
+        </button>
       </div>
       <table className="Table">
         <thead>
           <tr>
             <th></th>
-            <th>Name</th>
-            <th>Device</th>
-            <th>Path</th>
-            <th>Status</th>
+            {Object.keys(tableData[0]).map((name) => {
+              return (
+                <th key={name}>{name[0].toUpperCase() + name.substring(1)}</th>
+              );
+            })}
           </tr>
         </thead>
         <tbody>
