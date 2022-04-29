@@ -1,13 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./TableRow.scss";
 
-export default function TableRow({ data }) {
+export default function TableRow({ data, toggleRowSelect }) {
   const { name, device, path, status } = data;
 
   const [isSelected, setIsSelected] = useState(false);
 
   const handleRowToggle = () => {
     setIsSelected(!isSelected);
+    toggleRowSelect(name);
   };
 
   const handleKeyDown = (e) => {
@@ -20,7 +21,7 @@ export default function TableRow({ data }) {
     <tr
       className="TableRow"
       onClick={handleRowToggle}
-      tabindex="0"
+      tabIndex="0"
       onKeyDown={handleKeyDown}
     >
       <td className={`Checkbox ${isSelected ? "Checked" : ""}`}></td>

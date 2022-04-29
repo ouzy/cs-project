@@ -1,9 +1,10 @@
+import { useReducer } from "react";
 import "../TableRow/TableRow";
 import TableRow from "../TableRow/TableRow";
 import "./Table.scss";
 
 export default function Table() {
-  const data = [
+  const tableData = [
     {
       name: "smss.exe",
       device: "Stark",
@@ -40,11 +41,42 @@ export default function Table() {
     }
   ];
 
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case "select":
+        return state.map((row) => {
+          if (row.name === action.name) {
+            return { ...row, selected: !row.selected };
+          } else {
+            return row;
+          }
+        });
+      default:
+        return state;
+    }
+  };
+
+  const transformedData = tableData.map((row) => {
+    return { ...row, selected: false };
+  });
+
+  const handleToggleRowSelect = (fileName) => {
+    dispatch({ type: "select", name: fileName });
+  };
+
+  const [tableRows, dispatch] = useReducer(reducer, transformedData);
+
   return (
     <table className="Table">
       <tbody>
-        {data.map((dataRow) => {
-          return <TableRow data={dataRow} />;
+        {tableRows.map((dataRow) => {
+          return (
+            <TableRow
+              key={dataRow.name}
+              data={dataRow}
+              toggleRowSelect={handleToggleRowSelect}
+            />
+          );
         })}
       </tbody>
     </table>
