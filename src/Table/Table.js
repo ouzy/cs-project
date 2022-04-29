@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useReducer, useEffect, useCallback, useState } from "react";
 import "../TableRow/TableRow";
 import TableRow from "../TableRow/TableRow";
 import "./Table.scss";
@@ -64,21 +64,45 @@ export default function Table() {
     dispatch({ type: "select", name: fileName });
   };
 
+  const updateCountText = useCallback((numOfSelectedRows) => {
+    if (numOfSelectedRows > 0) {
+      setCountText(`Selected ${numOfSelectedRows}`);
+    } else {
+      setCountText("None Selected");
+    }
+  }, []);
+
+  const [countText, setCountText] = useState("None Selected");
   const [tableRows, dispatch] = useReducer(reducer, transformedData);
+  useEffect(() => {
+    updateCountText(tableRows.filter((row) => row.selected).length);
+  }, [tableRows, updateCountText]);
 
   return (
-    <table className="Table">
-      <tbody>
-        {tableRows.map((dataRow) => {
-          return (
-            <TableRow
-              key={dataRow.name}
-              data={dataRow}
-              toggleRowSelect={handleToggleRowSelect}
-            />
-          );
-        })}
-      </tbody>
-    </table>
+    <>
+      <div className="TableControls">{countText}</div>
+      <table className="Table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Device</th>
+            <th>Path</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tableRows.map((dataRow) => {
+            return (
+              <TableRow
+                key={dataRow.name}
+                data={dataRow}
+                toggleRowSelect={handleToggleRowSelect}
+              />
+            );
+          })}
+        </tbody>
+      </table>
+    </>
   );
 }

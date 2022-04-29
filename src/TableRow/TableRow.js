@@ -19,16 +19,18 @@ export default function TableRow({ data, toggleRowSelect }) {
 
   return (
     <tr
-      className="TableRow"
+      className={`TableRow ${isSelected ? "Selected" : ""}`}
       onClick={handleRowToggle}
       tabIndex="0"
       onKeyDown={handleKeyDown}
     >
-      <td className={`Checkbox ${isSelected ? "Checked" : ""}`}></td>
+      <td>
+        <div className="Checkbox"></div>
+      </td>
       <td>{name}</td>
       <td>{device}</td>
       <td>{path}</td>
-      <td>{status}</td>
+      <td>{status[0].toUpperCase() + status.substring(1)}</td>
     </tr>
   );
 }

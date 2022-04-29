@@ -1,15 +1,24 @@
+th, td {
+  padding: 10px;
+}
 .TableRow {
   width: 100%;
+  transition: all .2s ease;
   &:hover {
     cursor: pointer;
+    background-color: #F5F5F5;
+  }
+  &.Selected {
+    background-color: #EEEEEE;
+    .Checkbox {
+      background-color: #4E92E1;
+      border-color: #4E92E1;
+    }
   }
 }
 .Checkbox {
   display: block;
   width: 15px;
   height: 15px;
-  border: 2px solid black;
-  &.Checked {
-    background-color: black;
-  }
+  border: 2px solid #757575;
 }
