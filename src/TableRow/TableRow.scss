@@ -10,15 +10,5 @@ th, td {
   }
   &.Selected {
     background-color: #EEEEEE;
-    .Checkbox {
-      background-color: #4E92E1;
-      border-color: #4E92E1;
-    }
   }
-}
-.Checkbox {
-  display: block;
-  width: 15px;
-  height: 15px;
-  border: 2px solid #757575;
 }

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Checkbox from "../Checkbox/Checkbox";
 import "./TableRow.scss";
 
 export default function TableRow({ data, toggleRowSelect }) {
@@ -25,7 +26,7 @@ export default function TableRow({ data, toggleRowSelect }) {
       onKeyDown={handleKeyDown}
     >
       <td>
-        <div className="Checkbox"></div>
+        <Checkbox status={isSelected ? 2 : 0} />
       </td>
       <td>{name}</td>
       <td>{device}</td>
