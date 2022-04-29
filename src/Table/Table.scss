@@ -4,6 +4,9 @@
   border-spacing: 0;
   border-collapse: collapse;
   border: 1px solid #EDEDED;
+  th, td {
+    padding: 10px;
+  }
 }
 
 .TableControls {
