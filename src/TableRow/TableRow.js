@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Checkbox from "../Checkbox/Checkbox";
 import "./TableRow.scss";
 
 export default function TableRow({ data, toggleRowSelect }) {
-  const { name, device, path, status } = data;
+  const { name, device, path, status, selected } = data;
 
-  const [isSelected, setIsSelected] = useState(false);
+  const [isSelected, setIsSelected] = useState(selected);
 
   const handleRowToggle = () => {
     setIsSelected(!isSelected);
@@ -17,6 +17,10 @@ export default function TableRow({ data, toggleRowSelect }) {
       handleRowToggle();
     }
   };
+
+  useEffect(() => {
+    setIsSelected(selected);
+  }, [selected]);
 
   return (
     <tr

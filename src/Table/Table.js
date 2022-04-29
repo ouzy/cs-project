@@ -1,6 +1,6 @@
 import { useReducer, useEffect, useCallback, useState } from "react";
-import "../TableRow/TableRow";
 import TableRow from "../TableRow/TableRow";
+import Checkbox from "../Checkbox/Checkbox";
 import "./Table.scss";
 
 export default function Table() {
@@ -51,6 +51,14 @@ export default function Table() {
             return row;
           }
         });
+      case "selectAll":
+        return state.map((row) => {
+          return { ...row, selected: true };
+        });
+      case "deselectAll":
+        return state.map((row) => {
+          return { ...row, selected: false };
+        });
       default:
         return state;
     }
@@ -72,15 +80,45 @@ export default function Table() {
     }
   }, []);
 
+  const handleTableCheckboxClick = () => {
+    const numChecked = tableRows.filter((row) => row.selected).length;
+    const numElements = tableRows.length;
+
+    if (numChecked === numElements) {
+      dispatch({ type: "deselectAll" });
+    } else {
+      dispatch({ type: "selectAll" });
+    }
+  };
+
   const [countText, setCountText] = useState("None Selected");
   const [tableRows, dispatch] = useReducer(reducer, transformedData);
+  const [tableCheckboxStatus, setTableCheckboxStatus] = useState(0);
   useEffect(() => {
-    updateCountText(tableRows.filter((row) => row.selected).length);
+    const numChecked = tableRows.filter((row) => row.selected).length;
+    const numElements = tableRows.length;
+
+    if (numElements === numChecked) {
+      setTableCheckboxStatus(2);
+    } else if (numChecked > 0) {
+      setTableCheckboxStatus(1);
+    } else {
+      setTableCheckboxStatus(0);
+    }
+    updateCountText(numChecked);
   }, [tableRows, updateCountText]);
 
   return (
     <>
-      <div className="TableControls">{countText}</div>
+      <div className="TableControls">
+        <button
+          className="TableControlsButton"
+          onClick={handleTableCheckboxClick}
+        >
+          <Checkbox status={tableCheckboxStatus} />
+        </button>
+        <span>{countText}</span>
+      </div>
       <table className="Table">
         <thead>
           <tr>

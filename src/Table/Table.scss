@@ -5,3 +5,16 @@
 
   color: #757575;
 }
+
+.TableControls {
+  display: flex;
+  .TableControlsButton {
+    padding: 0;
+    border: 0;
+
+    margin-right: 50px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
